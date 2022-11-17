@@ -1,25 +1,41 @@
 /*
 1. Criar uma classe Funcionário que possui as propriedades Nome e Salário;
+
 2. Criar a classe Gerente que herda da classe Funcionário e possui a propriedade
 Departamento;
+
 3. Criar a classe Vendedor que também herda de Funcionário e possui a propriedade
 PercentualComissao;
+
 4. Na classe Gerente implementar um método ExibirInformacoes() que deve exibir no
 console todas as propriedades de um gerente: Nome, Salário e Departamento;
+
 5. Na classe Vendedor implementar um método CalcularSalario() que deve retornar o
 valor do Salário acrescido do PercentualComissao;
+
 6. Na classe Vendedor implementar o método ExibirInformacoes() que deve exibir no
 console as seguintes informações do Vendedor: Nome, Salario, Salario com
 comissão e o PercentualComissao.
 */
 
+// 1. Crie um método construtor para cada classe que receba como parâmetro as
+// informações que serão atribuídas as propriedades.
+
 class Funcionário {
     Nome
     Salario
+    constructor(nome, salario){
+        this.Nome = nome
+        this.Salario = salario
+    }
 }
 class Gerente extends Funcionário {
     Departamento
-
+    constructor(nome, salario, departamento){
+        super(nome, salario)
+        this.Departamento = departamento
+    }
+    
     ExibirInformacoes() {
         console.log("Nome do Gerente: " + this.Nome)
         console.log("Salário do Gerente: " + this.Salario)
@@ -28,6 +44,10 @@ class Gerente extends Funcionário {
 }
 class Vendedor extends Funcionário {
     PorcentualComissao
+    constructor(nome, salario, porcentualcomissao){
+        super(nome,salario)
+        this.PorcentualComissao = porcentualcomissao
+    }
 
     CalcularSalario() {
         let salarioCalculado = this.Salario + (this.Salario * (this.PorcentualComissao / 100))
@@ -42,9 +62,9 @@ class Vendedor extends Funcionário {
     }
 }
 
-let primeiroFuncionario = new Funcionário()
-primeiroFuncionario.Nome = "Leonardo"
-primeiroFuncionario.Salario = 1200
+let PrimeiroFuncionario = new Funcionário()
+PrimeiroFuncionario.Nome = "Leonardo"
+PrimeiroFuncionario.Salario = 1200
 
 
 let PrimeiroGerente = new Gerente()
@@ -52,9 +72,84 @@ PrimeiroGerente.Nome = "Leo Motorista"
 PrimeiroGerente.Salario = 2500
 PrimeiroGerente.Departamento = "Departamento B"
 
-let primeiroVendedor = new Vendedor()
-primeiroVendedor.Nome = "Vendedor Leo"
-primeiroVendedor.Salario = 1500
-primeiroVendedor.PorcentualComissao = 5 + "%"
+let PrimeiroVendedor = new Vendedor()
+PrimeiroVendedor.Nome = "Vendedor Leo"
+PrimeiroVendedor.Salario = 1500
+PrimeiroVendedor.PorcentualComissao = 5 + "%"
+
+let SegundoVendedor = new Vendedor()
+SegundoVendedor.Nome = "Vendedor Tiago"
+SegundoVendedor.Salario = 1500
+SegundoVendedor.PorcentualComissao = 5 + "%"
+
+let TerceiroVendedor = new Vendedor()
+TerceiroVendedor.Nome = "Vendedor Lucas"
+TerceiroVendedor.Salario = 1500
+TerceiroVendedor.PorcentualComissao = 5 + "%"
 
 
+/*
+1. Criar uma classe Produto com as propriedades Nome e Valor;
+
+2. Criar a classe Venda com as propriedades Vendedor que deve ser um objeto da
+classe Vendedor criada anteriormente, ListaDeProdutos que deve ser um array e
+ValorTotal;
+
+3. Na classe Venda implementar um método AdicionarProduto(), esse método deve
+criar um novo Produto e adicionar ele na propriedade ListaDeProdutos;
+
+4. Na classe Venda implementar um método CalcularTotal() que deve somar os valores
+de todos os Produtos na ListaDeProdutos e salvar na propriedade ValorTotal o
+resultado dessa soma;
+
+5. Na classe Venda implementar um método FinalizarVenda() que deve exibir no
+console o nome do Vendedor e o ValorTotal da venda.
+*/
+
+// Parte 2: 1. Crie um método construtor para cada classe que receba como parâmetro as
+// informações que serão atribuídas as propriedades, com exceção da ListaDe
+// Produtos e ValorTotal da classe Venda.
+
+class Produto {
+    Nome
+    Valor
+    constructor(nome, valor) {
+        this.Nome = nome
+        this.Valor = valor
+    }
+}
+class Venda {
+    vendedor
+    ListaDeProdutos = []
+    ValorTotal
+
+    AdicionarProduto(produto) {
+        this.ListaDeProdutos.push(produto)
+        console.log("Produto adicionado com sucesso")
+    }
+
+    CalcularTotal() {
+        this.ValorTotal = 0
+        for (let contador = 0; contador < this.ListaDeProdutos.length; contador++) {
+            this.ValorTotal = this.ValorTotal + this.ListaDeProdutos[contador].Valor
+        }
+    }
+
+    FinalizarVenda() {
+        console.log("O nome do vendedor é: " + this.vendedor)
+        console.log("O Valor total da Venda é: " + this.ValorTotal)
+    }
+}
+
+let produtoOculos = new Produto("Óculos", 200)
+let produtoBolsa = new Produto("Bolsa", 550)
+let produtoCamiseta = new Produto("Camiseta", 350)
+
+
+let VendaOculos = new Venda()
+let VendaBolsa = new Venda()
+let VendaCamiseta = new Venda()
+
+VendaOculos.vendedor = PrimeiroVendedor
+VendaBolsa.vendedor = SegundoVendedor
+VendaCamiseta.vendedor = TerceiroVendedor
