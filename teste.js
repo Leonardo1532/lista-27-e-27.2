@@ -57,35 +57,25 @@ class Vendedor extends Funcionário {
     ExibirInformacoes() {
         console.log("Nome do vendedor: " + this.Nome)
         console.log("Salário do vendedor: " + this.Salario)
-        console.log("Porcentual Comissão: " + this.PorcentualComissao)
+        console.log("Porcentual Comissão: " + this.PorcentualComissao + "%")
         console.log("O Salário com comissão: " + this.CalcularSalario())
     }
 }
 
-let PrimeiroFuncionario = new Funcionário()
-PrimeiroFuncionario.Nome = "Leonardo"
-PrimeiroFuncionario.Salario = 1200
+let PrimeiroFuncionario = new Funcionário("Leonardo", 1200)
 
 
-let PrimeiroGerente = new Gerente()
-PrimeiroGerente.Nome = "Leo Motorista"
-PrimeiroGerente.Salario = 2500
-PrimeiroGerente.Departamento = "Departamento B"
+let PrimeiroGerente = new Gerente("Leo Motorista", 2500, "Departamento B")
 
-let PrimeiroVendedor = new Vendedor()
-PrimeiroVendedor.Nome = "Vendedor Leo"
-PrimeiroVendedor.Salario = 1500
-PrimeiroVendedor.PorcentualComissao = 5 + "%"
 
-let SegundoVendedor = new Vendedor()
-SegundoVendedor.Nome = "Vendedor Tiago"
-SegundoVendedor.Salario = 1500
-SegundoVendedor.PorcentualComissao = 5 + "%"
+let PrimeiroVendedor = new Vendedor("Vendedor Leo", 1500, 5)
 
-let TerceiroVendedor = new Vendedor()
-TerceiroVendedor.Nome = "Vendedor Lucas"
-TerceiroVendedor.Salario = 1500
-TerceiroVendedor.PorcentualComissao = 5 + "%"
+
+let SegundoVendedor = new Vendedor("Vendedor Tiago", 1500, 5)
+
+
+let TerceiroVendedor = new Vendedor("Vendedor Lucas", 1500, 5)
+
 
 
 /*
@@ -119,9 +109,13 @@ class Produto {
     }
 }
 class Venda {
-    vendedor
+    Vendedor
     ListaDeProdutos = []
     ValorTotal
+
+    constructor(vendedor){
+        this.Vendedor = vendedor
+    }
 
     AdicionarProduto(produto) {
         this.ListaDeProdutos.push(produto)
@@ -136,7 +130,7 @@ class Venda {
     }
 
     FinalizarVenda() {
-        console.log("O nome do vendedor é: " + this.vendedor)
+        console.log("O nome do vendedor é: " + this.Vendedor.Nome)
         console.log("O Valor total da Venda é: " + this.ValorTotal)
     }
 }
@@ -146,10 +140,6 @@ let produtoBolsa = new Produto("Bolsa", 550)
 let produtoCamiseta = new Produto("Camiseta", 350)
 
 
-let VendaOculos = new Venda()
-let VendaBolsa = new Venda()
-let VendaCamiseta = new Venda()
-
-VendaOculos.vendedor = PrimeiroVendedor
-VendaBolsa.vendedor = SegundoVendedor
-VendaCamiseta.vendedor = TerceiroVendedor
+let Venda1 = new Venda(PrimeiroVendedor)
+let Venda2 = new Venda(SegundoVendedor)
+let Venda3 = new Venda(TerceiroVendedor)
